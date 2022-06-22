@@ -4,8 +4,6 @@ To segment the image using global thresholding, adaptive thresholding and Otsu's
 
 ## SOFTWARE REQUIRED:
 1. Anaconda - Python 3.7
-2. OpenCV
-
 ## ALGORITHM:
 
 ### Step 1:
@@ -15,54 +13,33 @@ Load the necessary packages.
 Read the Image and convert to grayscale.
 
 ### Step 3:
-Use Global thresholding to segment the image.
+Use Global thresholding to segment the image and Use Adaptive thresholding to segment the image.
 
 ### Step 4:
-Use Adaptive thresholding to segment the image.
-
-### Step 5:
-Use Otsu's method to segment the image.
-
-### Step 6:
-Display the results.
+Use Otsu's method to segment the image.Display the results.
 
 ## PROGRAM:
-```
-# Load the necessary packages
+```python
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-
-# Read the Image and convert to grayscale
 image=cv2.imread("white.jpg",1)
 image=cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
 image_gray=cv2.imread("white.jpg",0)
-
-# Use Global thresholding to segment the image
 ret,thresh_white1=cv2.threshold(image_gray,86,255,cv2.THRESH_BINARY)
 ret,thresh_white2=cv2.threshold(image_gray,86,255,cv2.THRESH_BINARY_INV)
 ret,thresh_white3=cv2.threshold(image_gray,86,255,cv2.THRESH_TOZERO)
 ret,thresh_white4=cv2.threshold(image_gray,86,255,cv2.THRESH_TOZERO_INV)
 ret,thresh_white5=cv2.threshold(image_gray,100,255,cv2.THRESH_TRUNC)
-
-# Use Otsu's method to segment the image 
 ret,thresh_white6=cv2.threshold(image_gray,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
-
-# Use Adaptive thresholding to segment the image
 thresh_white7=cv2.adaptiveThreshold(image_gray,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,2)
 thresh_white8=cv2.adaptiveThreshold(image_gray,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,2)
-
-# Display the results
-titles=["Gray Image","Threshold Image (Binary)","Threshold Image (Binary Inverse)","Threshold Image (To Zero)"
-       ,"Threshold Image (To Zero-Inverse)","Threshold Image (Truncate)","Otsu","Adaptive Threshold (Mean)","Adaptive Threshold (Gaussian)"]
 images=[image_gray,thresh_white1,thresh_white2,thresh_white3,thresh_white4,thresh_white5,thresh_white6,thresh_white7,thresh_white8]
 for i in range(0,9):
     plt.figure(figsize=(10,10))
     plt.subplot(1,2,1)
     plt.title("Original Image")
     plt.imshow(image)
-    plt.axis("off")
-    plt.subplot(1,2,2)
     plt.title(titles[i])
     plt.imshow(cv2.cvtColor(images[i],cv2.COLOR_BGR2RGB))
     plt.axis("off")
@@ -78,8 +55,6 @@ for i in range(0,9):
 ### Global Thresholding
 
 ![Screenshot (245)](https://user-images.githubusercontent.com/75235477/170210691-e519391e-af17-4a6a-b47f-5f97f2161916.png)
-
-
 ![Screenshot (246)](https://user-images.githubusercontent.com/75235477/170210702-d782b693-6af9-498e-8682-d27859e3ade6.png)
 ![Screenshot (247)](https://user-images.githubusercontent.com/75235477/170210725-08dddc7f-0534-4105-84f8-7a509250df2b.png)
 ![Screenshot (249)](https://user-images.githubusercontent.com/75235477/170210830-84d352ce-0542-4938-bc91-96c4b7df38a5.png)
